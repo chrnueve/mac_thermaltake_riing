@@ -1,5 +1,3 @@
-[![CircleCI](https://circleci.com/gh/chestm007/linux_thermaltake_riing.svg?style=svg)](https://circleci.com/gh/chestm007/linux_thermaltake_riing)  
-
 # Mac driver and daemon for Thermaltake Riing
 Forked from https://github.com/chestm007/linux_thermaltake_riing
 
