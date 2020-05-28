@@ -1,5 +1,5 @@
 """
-linux_thermaltake_rgb
+mac_thermaltake_rgb
 Software to control your thermaltake hardware
 Copyright (C) 2018  Max Chesterfield (chestm007@hotmail.com)
 
@@ -22,12 +22,12 @@ import unittest
 import yaml
 from mock import patch
 
-from linux_thermaltake_rgb.controllers import ThermaltakeController
-from linux_thermaltake_rgb.daemon.config import Config
+from mac_thermaltake_rgb.controllers import ThermaltakeController
+from mac_thermaltake_rgb.daemon.config import Config
 
 
 class ConfigTest(unittest.TestCase):
-    @patch('linux_thermaltake_rgb.drivers.ThermaltakeControllerDriver._initialize_device', autospec=True)
+    @patch('mac_thermaltake_rgb.drivers.ThermaltakeControllerDriver._initialize_device', autospec=True)
     def test_load_from_assets(self, init_dev):
         def verify_config(config):
             for thing in (config, config.controllers, config.fan_manager, config.lighting_manager):
@@ -52,7 +52,7 @@ class ConfigTest(unittest.TestCase):
     def load_g3_config(self):
         return self.load_config_from_string(G3_CONFIG)
 
-    @patch('linux_thermaltake_rgb.drivers.ThermaltakeControllerDriver._initialize_device', autospec=True)
+    @patch('mac_thermaltake_rgb.drivers.ThermaltakeControllerDriver._initialize_device', autospec=True)
     def test_g3_config(self, init_dev):
         config = self.load_g3_config()
         self.assertEqual(len(config.controllers), 5, 'not all controllers recognized in config')
@@ -63,7 +63,7 @@ class ConfigTest(unittest.TestCase):
             ThermaltakeController.factory(controller.get('type'))
             self.assertTrue(init_dev.called)
 
-    @patch('linux_thermaltake_rgb.drivers.ThermaltakeControllerDriver._initialize_device', autospec=True)
+    @patch('mac_thermaltake_rgb.drivers.ThermaltakeControllerDriver._initialize_device', autospec=True)
     def test_full_config(self, init_dev):
         config = self.load_config_from_string(G3_CONFIG)
         self.assertIsNotNone(config.controllers)

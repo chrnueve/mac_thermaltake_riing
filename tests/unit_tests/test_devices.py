@@ -1,5 +1,5 @@
 """
-linux_thermaltake_rgb
+mac_thermaltake_rgb
 Software to control your thermaltake hardware
 Copyright (C) 2018  Max Chesterfield (chestm007@hotmail.com)
 
@@ -21,13 +21,13 @@ import unittest
 
 from mock import patch
 
-from linux_thermaltake_rgb.controllers import ThermaltakeController
-from linux_thermaltake_rgb.devices import ThermaltakeDevice
+from mac_thermaltake_rgb.controllers import ThermaltakeController
+from mac_thermaltake_rgb.devices import ThermaltakeDevice
 
 
 class DeviceTest(unittest.TestCase):
 
-    @patch('linux_thermaltake_rgb.drivers.ThermaltakeControllerDriver._initialize_device', autospec=True)
+    @patch('mac_thermaltake_rgb.drivers.ThermaltakeControllerDriver._initialize_device', autospec=True)
     def test_device_factory(self, init_dev):
         controller = ThermaltakeController.factory('g3')
         for i, clazz in enumerate(ThermaltakeDevice.inheritors()):

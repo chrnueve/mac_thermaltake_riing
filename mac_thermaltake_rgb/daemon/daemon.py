@@ -1,5 +1,5 @@
 """
-linux_thermaltake_rgb
+mac_thermaltake_rgb
 Software to control your thermaltake hardware
 Copyright (C) 2018  Max Chesterfield (chestm007@hotmail.com)
 
@@ -19,13 +19,13 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 """
 import time
 
-from linux_thermaltake_rgb.controllers import ThermaltakeController
-from linux_thermaltake_rgb.fan_manager import FanModel
-from linux_thermaltake_rgb.daemon.config import Config
-from linux_thermaltake_rgb.lighting_manager import LightingEffect
-from linux_thermaltake_rgb import devices, LOGGER
-from linux_thermaltake_rgb.fan_manager import FanManager
-from linux_thermaltake_rgb.devices import ThermaltakeDevice
+from mac_thermaltake_rgb.controllers import ThermaltakeController
+from mac_thermaltake_rgb.fan_manager import FanModel
+from mac_thermaltake_rgb.daemon.config import Config
+from mac_thermaltake_rgb.lighting_manager import LightingEffect
+from mac_thermaltake_rgb import devices, LOGGER
+from mac_thermaltake_rgb.fan_manager import FanManager
+from mac_thermaltake_rgb.devices import ThermaltakeDevice
 
 
 class ThermaltakeDaemon:

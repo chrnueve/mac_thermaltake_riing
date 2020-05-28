@@ -1,5 +1,5 @@
 """
-linux_thermaltake_rgb
+mac_thermaltake_rgb
 Software to control your thermaltake hardware
 Copyright (C) 2018  Max Chesterfield (chestm007@hotmail.com)
 
@@ -20,7 +20,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 import usb
 
-from linux_thermaltake_rgb import LOGGER
+from mac_thermaltake_rgb import LOGGER
 
 
 class ThermaltakeControllerDriver:

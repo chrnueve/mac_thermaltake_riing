@@ -1,5 +1,5 @@
 """
-linux_thermaltake_rgb
+mac_thermaltake_rgb
 Software to control your thermaltake hardware
 Copyright (C) 2018  Max Chesterfield (chestm007@hotmail.com)
 
@@ -21,7 +21,7 @@ import unittest
 
 from mock import patch
 
-from linux_thermaltake_rgb.fan_manager import FanModel, TempTargetModel, CurveModel
+from mac_thermaltake_rgb.fan_manager import FanModel, TempTargetModel, CurveModel
 
 TempTargetModel._get_temp = (lambda self: 50)
 CurveModel._get_temp = (lambda self: 50)
@@ -29,7 +29,7 @@ CurveModel._get_temp = (lambda self: 50)
 
 class FanTest(unittest.TestCase):
 
-    @patch('linux_thermaltake_rgb.drivers.ThermaltakeControllerDriver._initialize_device', autospec=True)
+    @patch('mac_thermaltake_rgb.drivers.ThermaltakeControllerDriver._initialize_device', autospec=True)
     def test_fan_factory(self, init_dev):
 
         for clazz in FanModel.inheritors():

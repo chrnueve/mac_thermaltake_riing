@@ -1,5 +1,5 @@
 """
-linux_thermaltake_rgb
+mac_thermaltake_rgb
 Software to control your thermaltake hardware
 Copyright (C) 2018  Max Chesterfield (chestm007@hotmail.com)
 
@@ -19,9 +19,9 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 """
 from collections import namedtuple
 
-from linux_thermaltake_rgb import LOGGER
-from linux_thermaltake_rgb.classified_object import ClassifiedObject
-from linux_thermaltake_rgb.globals import PROTOCOL_SET, PROTOCOL_LIGHT, PROTOCOL_FAN, PROTOCOL_GET
+from mac_thermaltake_rgb import LOGGER
+from mac_thermaltake_rgb.classified_object import ClassifiedObject
+from mac_thermaltake_rgb.globals import PROTOCOL_SET, PROTOCOL_LIGHT, PROTOCOL_FAN, PROTOCOL_GET
 
 FanSpeed = namedtuple('FanSpeed', ['set_speed', 'rpm'])
 
@@ -76,6 +76,6 @@ class ThermaltakeFanDevice(ThermaltakeDevice):
         return FanSpeed(speed, (rpm_h << 8) + rpm_l)
 
 
-from linux_thermaltake_rgb.devices.pumps import *
-from linux_thermaltake_rgb.devices.fans import *
-from linux_thermaltake_rgb.devices.lights import *
+from mac_thermaltake_rgb.devices.pumps import *
+from mac_thermaltake_rgb.devices.fans import *
+from mac_thermaltake_rgb.devices.lights import *

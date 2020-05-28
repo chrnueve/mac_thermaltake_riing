@@ -1,5 +1,5 @@
 """
-linux_thermaltake_rgb
+mac_thermaltake_rgb
 Software to control your thermaltake hardware
 Copyright (C) 2018  Max Chesterfield (chestm007@hotmail.com)
 
@@ -21,10 +21,11 @@ import time
 from threading import Thread
 
 import numpy as np
-from psutil import sensors_temperatures
+# from psutil import sensors_temperatures
+import subprocess
 
-from linux_thermaltake_rgb import LOGGER
-from linux_thermaltake_rgb.classified_object import ClassifiedObject
+from mac_thermaltake_rgb import LOGGER
+from mac_thermaltake_rgb.classified_object import ClassifiedObject
 
 
 class FanModel(ClassifiedObject):
@@ -47,7 +48,6 @@ class TempTargetModel(FanModel):
     model = 'temp_target'
 
     def __init__(self, config):
-        self.sensor_name = config.get('sensor_name')
         self.target = float(config.get('target'))
         self.multiplier = config.get('multiplier')
         self.last_speed = 10
@@ -65,10 +65,12 @@ class TempTargetModel(FanModel):
         return speed
 
     def _get_temp(self):
-        return sensors_temperatures().get(self.sensor_name)[0].current
+        o = subprocess.check_output(['osx-cpu-temp'])
+        o = o.decode().replace(" °C\n", "")
+        return float(o)
 
     def __str__(self) -> str:
-        return f'target {self.target}°C on sensor {self.sensor_name}'
+        return f'target {self.target}°C'
 
 
 class LockedSpeedModel(FanModel):
@@ -98,7 +100,6 @@ class CurveModel(FanModel):
         self.points = np.array(config.get('points'))
         self.temps = self.points[:, 0]
         self.speeds = self.points[:, 1]
-        self.sensor_name = config.get('sensor_name')
         LOGGER.debug(f'curve fan points: {self.points}')
 
         if np.min(self.speeds) < 0:
@@ -118,7 +119,9 @@ class CurveModel(FanModel):
         return np.interp(x=self._get_temp(), xp=self.temps, fp=self.speeds)
 
     def _get_temp(self):
-        return sensors_temperatures().get(self.sensor_name)[0].current
+        o = subprocess.check_output(['osx-cpu-temp'])
+        o = o.decode().replace(" °C\n", "")
+        return float(o)
 
     def __str__(self) -> str:
         return f'curve {self.points}'

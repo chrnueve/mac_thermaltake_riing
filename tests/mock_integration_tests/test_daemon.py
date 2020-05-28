@@ -1,5 +1,5 @@
 """
-linux_thermaltake_rgb
+mac_thermaltake_rgb
 Software to control your thermaltake hardware
 Copyright (C) 2018  Max Chesterfield (chestm007@hotmail.com)
 
@@ -23,8 +23,8 @@ import unittest
 from io import StringIO
 
 from mock import patch
-from linux_thermaltake_rgb import LOGGER
-from linux_thermaltake_rgb.daemon.daemon import ThermaltakeDaemon, Config
+from mac_thermaltake_rgb import LOGGER
+from mac_thermaltake_rgb.daemon.daemon import ThermaltakeDaemon, Config
 
 
 class DaemonMockIntegrationTest(unittest.TestCase):
@@ -32,7 +32,7 @@ class DaemonMockIntegrationTest(unittest.TestCase):
         self.config_abs_path = str(Config.abs_config_dir)
         Config.abs_config_dir = ''
 
-    @patch('linux_thermaltake_rgb.drivers.ThermaltakeControllerDriver._initialize_device', autospec=True)
+    @patch('mac_thermaltake_rgb.drivers.ThermaltakeControllerDriver._initialize_device', autospec=True)
     def test_basic_startup(self, init_dev):
         LOGGER.setLevel(logging.DEBUG)
         stream = StringIO()

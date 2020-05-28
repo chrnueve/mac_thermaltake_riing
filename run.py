@@ -1,8 +1,8 @@
 import logging
 import sys
 
-from linux_thermaltake_rgb import DEBUG
-from linux_thermaltake_rgb.daemon.daemon import ThermaltakeDaemon
+from mac_thermaltake_rgb import DEBUG
+from mac_thermaltake_rgb.daemon.daemon import ThermaltakeDaemon
 
 
 def main():

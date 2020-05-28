@@ -1,7 +1,13 @@
 [![CircleCI](https://circleci.com/gh/chestm007/linux_thermaltake_riing.svg?style=svg)](https://circleci.com/gh/chestm007/linux_thermaltake_riing)  
 
-# Linux driver and daemon for Thermaltake Riing
+# Mac driver and daemon for Thermaltake Riing
+Forked from https://github.com/chestm007/linux_thermaltake_riing
 
+This is a pure copy adapted to work on Mac using osx-cpu-temp as temperature sensor
+
+WARNING: there's a lot of WiP here, im not a Python developer, so maybe things here look strange.
+
+Help and PR's are welcome!
 
 ## Compatibility
 Python3 only.
@@ -19,37 +25,24 @@ If your's isn't listed, please create an issue and I'll implement it ASAP!!
 
 
 ## Installation
-
-### Pypi
-
-`sudo pip3 install linux_thermaltake_rgb`  
-The setup file will create the systemd unit
-in `/usr/share/linux_thermaltake_rgb`  
-you will need to copy these to the appropriate locations:
-
-```bash
-sudo cp /usr/share/linux_thermaltake_rgb/linux-thermaltake-rgb.service /usr/lib/systemd/system/
-
-# and if this is a fresh install copy the default config file:
-sudo mkdir /etc/linux_thermaltake_rgb/
-sudo cp /usr/share/linux_thermaltake_rgb/config.yml /etc/linux_thermaltake_rgb/
-```
-
-### Arch linux
-
-available in the aur as `linux-thermaltake-rgb`
-
-### Starting and Enabling the Daemon
-
-start and enable the systemd service  
-`systemctl enable --now linux-thermaltake-rgb.service`  
+- osx-cpu-temp (`brew install osx-cpu-temp`)
+- libusb (`brew install libusb`)
+- pyyaml (`pip3 install pyyaml`)
+- GObject (`pip3 install GObject`)
+- pyusb (`pip3 install pyusb`)
+- numpy (`pip3 install numpy`)
+- pickle5 (`pip3 install pickle5`)
 
 
+## Run
+Launch `python3 run.py` on the main project folder.
+
+Daemon is not available, as I don't know how to do it under Mac OS
 ## Configuration
-the configuration file is expected to be in: `/etc/linux_thermaltake_rgb/config.yml`  
+the configuration file is expected to be in: `(user_home)/mac_thermaltake_rgb/config.yml`  
 edit and configure suitably.  
 
-example config is in `linux_thermaltake_rgb/assets/config.yml`  
+example config is in `mac_thermaltake_rgb/assets/config.yml`  
 
 ### Controller Types
 - g3
@@ -77,7 +70,6 @@ example config is in `linux_thermaltake_rgb/assets/config.yml`
   temperature to target temperature multiplied by the specified multiplier
   with an extemely simple - read, dumb - smoothing function
   - settings:
-    - sensor_name [name of the sensor to get temperature reading from(names can be found by running `sensors` in a terminal)]
     - target [target temperature]
     - multiplier
     
@@ -100,10 +92,8 @@ example config is in `linux_thermaltake_rgb/assets/config.yml`
         - [0, 0]  # [temp(*C), speed(0-100%)]
         - [50, 30]
         - [70, 100]
-      sensor_name: k10temp
 
     ```
-    - sensor_name [name of the sensor to get temperature reading from(names can be found by running `sensors` in a terminal)]
     
 ### Lighting Manager Settings
 To save repetition:  
@@ -129,7 +119,6 @@ g/r/b: RGB values of the desired colour
   depending on the temperature of the selected sensor
   - settings: 
     - speed 
-    - sensor_name [name of the sensor to get temperature reading from(names can be found by running `sensors` in a terminal)]
     - cold [desired temperature to set lighting to blue]
     - hot [desired temperature to set lighting to red]
     - target [desired temperature to set lighting to green]

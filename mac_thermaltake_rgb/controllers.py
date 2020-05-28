@@ -1,5 +1,5 @@
 """
-linux_thermaltake_rgb
+mac_thermaltake_rgb
 Software to control your thermaltake hardware
 Copyright (C) 2018  Max Chesterfield (chestm007@hotmail.com)
 
@@ -17,8 +17,8 @@ You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 """
-from linux_thermaltake_rgb import drivers, LOGGER
-from linux_thermaltake_rgb.classified_object import ClassifiedObject
+from mac_thermaltake_rgb import drivers, LOGGER
+from mac_thermaltake_rgb.classified_object import ClassifiedObject
 
 
 class ThermaltakeController(ClassifiedObject):

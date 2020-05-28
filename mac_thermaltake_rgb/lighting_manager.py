@@ -1,5 +1,5 @@
 """
-linux_thermaltake_rgb
+mac_thermaltake_rgb
 Software to control your thermaltake hardware
 Copyright (C) 2018  Max Chesterfield (chestm007@hotmail.com)
 
@@ -17,15 +17,14 @@ You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 """
+import subprocess
 import time
 from collections import namedtuple
 from threading import Thread
 
-from psutil import sensors_temperatures
-
-from linux_thermaltake_rgb import LOGGER
-from linux_thermaltake_rgb.classified_object import ClassifiedObject
-from linux_thermaltake_rgb.globals import RGB
+from mac_thermaltake_rgb import LOGGER
+from mac_thermaltake_rgb.classified_object import ClassifiedObject
+from mac_thermaltake_rgb.globals import RGB
 import math
 
 
@@ -156,7 +155,7 @@ class AlternatingLightingEffect(CustomLightingEffect):
 
 class TemperatureLightingEffect(ThreadedCustomLightingEffect):
     """
-    ::: settings: [speed, cold, hot, target, sensor_name]
+    ::: settings: [speed, cold, hot, target]
     """
     model = 'temperature'
 
@@ -166,7 +165,6 @@ class TemperatureLightingEffect(ThreadedCustomLightingEffect):
 
     def __init__(self, config):
         super().__init__(config)
-        self.sensor_name = self._config.get('sensor_name')
         self.cold = int(self._config.get('cold', 20))
         self.target = int(self._config.get('target', 30))
         self.hot = int(self._config.get('hot', 60))
@@ -177,7 +175,9 @@ class TemperatureLightingEffect(ThreadedCustomLightingEffect):
         def flatten(l):
             return [item for sublist in l for item in sublist]
 
-        self.cur_temp = sensors_temperatures().get(self.sensor_name)[0].current
+        o = subprocess.check_output(['osx-cpu-temp'])
+        o = o.decode().replace(" °C\n", "")
+        self.cur_temp = float(o)
         if self.cur_temp <= self.cold:
             self.angle = self.cold_angle
         elif self.cur_temp < self.target:
